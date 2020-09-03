@@ -42,6 +42,9 @@ inputs:
   prebuild_script:
     description: Relative path from top-level to script to run before Docker build
     required: false
+  postbuild_script:
+    description: Relative path from top-level to script to run after Docker build
+    required: false
 outputs:
   image:
     description: 'The created image name'

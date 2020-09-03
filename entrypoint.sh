@@ -15,6 +15,7 @@ function main() {
   login
   run_pre_build_script $INPUT_PREBUILD_SCRIPT
   docker_build $INPUT_TAGS $ACCOUNT_URL
+  run_post_build_script $INPUT_POSTBUILD_SCRIPT
   create_ecr_repo $INPUT_CREATE_REPO
   docker_push_to_ecr $INPUT_TAGS $ACCOUNT_URL
 }
@@ -68,6 +69,15 @@ function run_pre_build_script() {
     chmod a+x $1
     $1
     echo "== FINISHED PREBUILD SCRIPT"
+  fi
+}
+
+function run_post_build_script() {
+  if [ ! -z "${1}" ]; then
+    echo "== START POST-BUILD SCRIPT"
+    chmod a+x $1
+    $1
+    echo "== FINISHED POST-BUILD SCRIPT"
   fi
 }
 
