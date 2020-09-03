@@ -1,11 +1,9 @@
-FROM docker:19.03.4
+FROM docker:19.03.12
 
 RUN apk update \
   && apk upgrade \
-  && apk add --no-cache --update python py-pip coreutils bash \
-  && rm -rf /var/cache/apk/* \
-  && pip install awscli \
-  && apk --purge -v del py-pip
+  && apk add --no-cache --update aws-cli python3 coreutils bash \
+  && rm -rf /var/cache/apk/*
 
 ADD entrypoint.sh /entrypoint.sh
 
